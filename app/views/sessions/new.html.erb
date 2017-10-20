@@ -1,0 +1,15 @@
+
+  <h1>Login</h1>
+  <p>Please login with your email and password.</p> 
+
+
+<form class="form" action="login" method="post">
+<input type="hidden" name="authenticity_token" placeholder="<%= form_authenticity_token %>">
+	
+			
+		<p><input type="email" name="user[email]" placeholder="Email"></p>
+	
+	
+		<p><input type="password" name="user[password]" placeholder="Password"></p>
+	
+	<button type="submit">Login</button>	

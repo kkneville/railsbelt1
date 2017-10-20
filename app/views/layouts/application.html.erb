@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Railsbelt1</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p><% if current_user %>
+	Logged in as <%= current_user.alias %> |
+	<%= link_to "Profile", user_path(:user_id => current_user.id)  %> |
+	<a href="<%= brightideas_path current_user.id  %>">Dashboard</a> |
+	<a href="<%= logout_path %>" data-method="delete">Logout</a>
+	<% else %>
+	<a href="<%= register_path %>">Register</a> |
+	<a href="<%= login_path %>">Login</a>	
+	<% end %> </p>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |error| %>
+	<p><%= error %> </p>
+<% end %>	
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
