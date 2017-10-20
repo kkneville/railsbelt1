@@ -1,10 +1,10 @@
 <h2>Welcome, <%= current_user.alias %></h2>
 
 
-<h3>Post a new Idea</h3>
-<form class="form" action="/create" method="post">
+<h3>Post a New Idea</h3>
+<form class="form" action="ideas/create" method="post">
 <input type="hidden" name="authenticity_token" placeholder="<%= form_authenticity_token %>">
-<input type="hidden" name="idea[user]" value="<%= current_user.id%>">
+<input type="hidden" name="user_id" value="<%= current_user.id%>">
 <input type="text" name="idea[content]" placeholder="Your Idea">
 <input type="submit" value="Post">
 </form>
@@ -15,8 +15,14 @@
 <% if @ideas %>
 <% @ideas.each do |idea| %>
 <div>
-	<p> <%= idea.user.alias %> says: </p>
-	<p> <%= idea.content %> </p>
+	<p> <%= link_to "#{idea.user.alias}", user_path(:user_id => idea.user.id)  %> says: <%= idea.content %> </p>
+	<p> <%= link_to "Like", add_like_path(:idea_id => idea.id), :method => :post %> 
+		| <%= link_to "#{people_count(idea.id)} people like", idea_detail_path(:idea_id => idea.id) %> 
+		| <%= "#{total_likes(idea.id)} total likes" %> 
+		| <% if idea.user.id == current_user.id %>
+			<%= link_to "Delete", delete_idea_path(:idea_id => idea.id), :method => :delete %> 
+		  <% end %>
+	<p>----------------------------------------------</p>	
 </div>
 <% end %>
 <% end %>

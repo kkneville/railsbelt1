@@ -1,18 +1,32 @@
 Rails.application.routes.draw do
   
-  get 'ideas/index' => 'ideas#index', as: 'brightideas'
+  get 'likes/index'
+
+  get 'likes/new'
+
+  post 'likes/create' => 'likes#create', as: 'add_like'
+
+  get 'likes/show'
+
+  get 'likes/edit'
+
+  get 'likes/update'
+
+  get 'likes/delete'
+
+  get 'brightideas' => 'ideas#index', as: 'brightideas'
 
   get 'ideas/new'
 
   post 'ideas/create' => 'ideas#create', as: "new_idea"
 
-  get 'ideas/show'
+  get 'ideas/show' => 'ideas#show', as: 'idea_detail'
 
   get 'ideas/edit'
 
   get 'ideas/update'
 
-  get 'ideas/delete'
+  delete 'ideas/delete' => 'ideas#delete', as: 'delete_idea'
 
   root 'users#new'
 

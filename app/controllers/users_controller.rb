@@ -21,6 +21,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
+    @posts = Idea.all.where(user_id: @user.id)
+    @postcount = @posts.length
+
+    @likes = Like.all.where(user_id: @user.id)
+    @userlikes = @likes.length
+
     return render "/users/show.html.erb"
   end
 

@@ -2,6 +2,7 @@ class IdeasController < ApplicationController
   
   def index
     @ideas = Idea.all
+
   end
 
   def new
@@ -18,6 +19,8 @@ class IdeasController < ApplicationController
   end
 
   def show
+    @idea = Idea.find(params[:idea_id])
+    @people = @idea.users.select(:id).map(&:id).uniq
   end
 
   def edit
@@ -27,11 +30,15 @@ class IdeasController < ApplicationController
   end
 
   def delete
+    idea = Idea.find(params[:idea_id])
+    idea.delete
+    return redirect_to brightideas_path
   end
 
   private
     def idea_params
-      params.require(:idea).permit(:content, :user)
+
+      params.require(:idea).permit(:content).merge(user: current_user)
     end 
 
 end

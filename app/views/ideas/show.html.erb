@@ -1,2 +1,32 @@
-<h1>Ideas#show</h1>
-<p>Find me in app/views/ideas/show.html.erb</p>
+
+<h3>Bright Idea:</h3>
+
+<p>---------------------------------------------</p>
+
+<p> <%= link_to "#{@idea.user.alias}", user_path(:user_id => @idea.user.id)  %> says: <%= @idea.content %> </p>
+
+<p>---------------------------------------------</p>
+
+
+<h3>People who liked this idea:</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th> Alias </th>
+			<th> Name </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @people %>
+		<% @people.each do |person| %>
+		<tr>
+			<td> <%= link_to "#{find_person(person).alias}", user_path(:user_id => person)  %> </td>
+			<td> <%= find_person(person).name %> </td>
+		</tr>
+		<% end %>
+		<% end %>
+	</tbody>
+
+
+</table>

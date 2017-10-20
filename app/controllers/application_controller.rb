@@ -8,6 +8,31 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  def people_count(idea)
+  	idea = Idea.find(idea)
+  	people = idea.users
+  	people = people.select(:id).map(&:id).uniq
+  	people_count = people.length
+  end 
+
+  helper_method :people_count
+
+  def find_person(person)
+  	person = User.find(person)
+  end
   
+  helper_method :find_person
+
+  def total_likes(idea_id)
+  	idea = Idea.find(idea_id)
+  	likes = idea.likes
+  	@total_likes = likes.length
+  end
+  
+  helper_method :total_likes	
+
+
+
 end
  
