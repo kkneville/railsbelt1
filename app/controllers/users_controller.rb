@@ -3,9 +3,9 @@ class UsersController < ApplicationController
   end
 
   def new
-    if current_user
-      return redirect_to brightideas_path
-    end  
+    # if current_user
+    #   return redirect_to brightideas_path
+    # end  
   end
 
   def create

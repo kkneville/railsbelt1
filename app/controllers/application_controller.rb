@@ -30,8 +30,13 @@ class ApplicationController < ActionController::Base
   	@total_likes = likes.length
   end
   
-  helper_method :total_likes	
+  helper_method :total_likes
 
+  def find_idea(idea_id)
+  	idea = Idea.find(idea_id)
+  end
+  
+  helper_method :find_idea	
 
 
 end

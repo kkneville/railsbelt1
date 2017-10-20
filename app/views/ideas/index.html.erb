@@ -15,6 +15,7 @@
 <% if @ideas %>
 <% @ideas.each do |idea| %>
 <div>
+	<% if idea %>
 	<p> <%= link_to "#{idea.user.alias}", user_path(:user_id => idea.user.id)  %> says: <%= idea.content %> </p>
 	<p> <%= link_to "Like", add_like_path(:idea_id => idea.id), :method => :post %> 
 		| <%= link_to "#{people_count(idea.id)} people like", idea_detail_path(:idea_id => idea.id) %> 
@@ -22,6 +23,7 @@
 		| <% if idea.user.id == current_user.id %>
 			<%= link_to "Delete", delete_idea_path(:idea_id => idea.id), :method => :delete %> 
 		  <% end %>
+	<% end %>	  
 	<p>----------------------------------------------</p>	
 </div>
 <% end %>
